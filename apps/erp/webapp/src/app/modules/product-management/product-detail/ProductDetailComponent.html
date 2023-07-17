@@ -1,0 +1,32 @@
+<nz-drawer [nzClosable]="false" [nzSize]="'large'" [nzVisible]="isVisible" nzTitle="Banner Information"
+    (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <div *ngIf="loading">
+            <nz-spin nzTip="Loading...">
+            </nz-spin>
+        </div>
+        <div *ngIf="!loading">
+            <nz-descriptions [nzColon]="'false'" [nzColumn]="1">
+
+                <nz-descriptions-item nzTitle="Banner Name :">
+                    <p class="bannerName">{{productDetail.product_name}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Banner Paragraph : ">
+                    <p>{{productDetail.product_density}} kG</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Created At : ">
+                    <p class="dataCreate">{{productDetail.created_at | date: 'yyyy/MM/dd - HH:mm'}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Updated At : ">
+                    <p class="dataUpdate">{{productDetail.updated_at | date: 'yyyy/MM/dd - HH:mm'}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Created By : ">
+                    <p class="dataCreate">{{productDetail.created_by}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Updated By :  ">
+                    <p class="dataUpdate">{{productDetail.updated_by }}</p>
+                </nz-descriptions-item>
+            </nz-descriptions>
+        </div>
+    </ng-container>
+</nz-drawer>

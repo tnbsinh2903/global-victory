@@ -1,0 +1,42 @@
+<nz-table nzTemplateMode #fixedTable [nzData]="listRoles" [nzFrontPagination]="false" [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Role</th>
+            <th>Permission</th>
+            <th></th>
+        </tr>
+    </thead>
+    <div class="spinner" *ngIf="loading">
+        <nz-spin nzTip="Loading...">
+        </nz-spin>
+    </div>
+    <tbody>
+        <tr *ngFor="let item of fixedTable.data; let i = index">
+            <td>{{i +1}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <div *ngFor="let module of listOfModule">
+            <td style="padding: 10px;">{{module.name}}</td>
+            </div>
+            </td>
+            <td style="text-align:center;">
+                <div class="row" *ngFor="let module of listOfModule">
+                    <ng-container *ngFor="let permission of module.permissions">
+                        <nz-checkbox-wrapper>
+                            <div nz-row>
+                                <div nz-col nzSpan="24">
+                                    <label nz-checkbox [nzChecked]="checkPermission(item.id,module.tag, permission)"
+                                        (change)=" onCheckboxChange(item.id, $event, module.tag,permission)">
+                                        {{permission}}
+                                    </label>
+                                </div>
+                            </div>
+                        </nz-checkbox-wrapper>
+                    </ng-container>
+                </div>
+            </td>
+        </tr>
+
+    </tbody>
+</nz-table>

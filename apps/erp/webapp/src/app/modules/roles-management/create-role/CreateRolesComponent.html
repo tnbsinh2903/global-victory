@@ -1,0 +1,35 @@
+<button nz-button nzType="primary" (click)="open()">Create Role</button>
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="360" [nzVisible]="visible"
+    nzTitle="Create" [nzClosable]="false" (nzOnClose)="close()">
+
+    <ng-container *nzDrawerContent>
+
+        <form nz-form [formGroup]="validateForm">
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzRequired nzFor="idRole">ID</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid ID!">
+                    <input type="text" class="input" nz-input formControlName="idRole" id="idRole" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="nameRole" nzRequired>
+                    <span>Name Role</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Role name!">
+                    <input type="text" class="input" nz-input id="nameRole" formControlName="nameRole" />
+                </nz-form-control>
+            </nz-form-item>
+
+
+
+            <nz-form-item>
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                    <button (click)="createRole()" nz-button btnCreate nzType="primary">Create Role</button>
+                </nz-form-control>
+            </nz-form-item>
+
+        </form>
+    </ng-container>
+</nz-drawer>

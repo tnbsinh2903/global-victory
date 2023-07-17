@@ -1,0 +1,62 @@
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="720" [nzVisible]="visible"
+    nzTitle="Update Banner" [nzClosable]="false" (nzOnClose)="close()">
+
+    <ng-container *nzDrawerContent>
+
+        <form nz-form [formGroup]="validateForm" *ngIf="formBannerUpdate">
+
+            <input type="hidden" id="idBanner" formControlName="idBanner" [(ngModel)]="formBannerUpdate.id">
+            <nz-form-item>
+                <nz-form-label [nzNoColon]="'true'" [nzSm]="6" [nzXs]="24"></nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <div>
+                        <div>
+                            <nz-avatar style="width: 400px; height: 120px;" [nzShape]="'square'" [nzSize]="120"
+                                nzIcon="cloud" [nzSrc]="host_api+'/' + formBannerUpdate.banner_image_url"></nz-avatar>
+                        </div>
+                        <br>
+                        <button (click)="showInputUpload()" class="buttonInputImage"><a>Post Banner</a></button>
+                        <input #tasks hidden (change)="uploadBannerImage($event)" class="inputImage" value="imageBanner"
+                            nz-input type="file" accept="image/*" id="bannerImage" formControlName="bannerImage" />
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="bannerName" nzRequired>
+                    <span>Name banner</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Banner Name Invalid!">
+                    <input type="text" class="input" nz-input id="bannerName" formControlName="bannerName"
+                        [(ngModel)]="formBannerUpdate.banner_name" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="bannerParagraph" nzRequired>
+                    <span>Name Paragraph</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Banner Paragraph Invalid !">
+                    <textarea class="input" cols="60" rows="4" nz-input id="bannerParagraph"
+                        formControlName="bannerParagraph" [(ngModel)]="formBannerUpdate.banner_paragraph"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="pinTop" nzRequired>
+                    <span>Pin Top</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <input class="inputUpdateCb" formControlName="pinTop" [(ngModel)]="formBannerUpdate.pin_top"
+                        type="checkbox" (change)="pintop($event)" />
+                </nz-form-control>
+            </nz-form-item>
+
+
+            <nz-form-item>
+                <nz-form-control [nzSpan]="19" [nzOffset]="11">
+                    <button (click)="updateBanner()" nz-button btnCreate nzType="primary">Update Banner</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-drawer>

@@ -1,0 +1,47 @@
+<nz-drawer [nzClosable]="false" [nzSize]="'large'" [nzVisible]="isVisible" nzTitle="Banner Information"
+    (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <div *ngIf="loading">
+            <nz-spin nzTip="Loading...">
+            </nz-spin>
+        </div>
+        <div *ngIf="!loading">
+            <nz-descriptions [nzColon]="'false'" [nzColumn]="1">
+                <nz-descriptions-item>
+                    <nz-avatar *ngIf="bannerDetail.banner_image_url" [nzShape]="'square'" style="width: 400px; height: 155px;" class="imageDetail"
+                        [nzSize]="130" nzIcon="cloud"
+                        [nzSrc]="host_api + '/' + bannerDetail.banner_image_url"></nz-avatar>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Banner Name :">
+                    <p class="bannerName">{{bannerDetail.banner_name}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Banner Paragraph : ">
+                    <p>{{bannerDetail.banner_paragraph}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Pin Top : ">
+                    <nz-checkbox-wrapper>
+                        <div nz-row class="pintop">
+                            <div nz-col nzSpan="24">
+                                <label>
+                                    <input type="checkbox" class="cbDetail" [checked]="bannerDetail.pin_top" disabled>
+                                </label>
+                            </div>
+                        </div>
+                    </nz-checkbox-wrapper>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Created At : ">
+                    <p class="dataCreate">{{bannerDetail.created_at | date: 'yyyy/MM/dd - HH:mm'}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Updated At : ">
+                    <p class="dataUpdate">{{bannerDetail.updated_at | date: 'yyyy/MM/dd - HH:mm'}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Created By : ">
+                    <p class="dataCreate">{{bannerDetail.created_by}}</p>
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Updated By :  ">
+                    <p class="dataUpdate">{{bannerDetail.updated_by }}</p>
+                </nz-descriptions-item>
+            </nz-descriptions>
+        </div>
+    </ng-container>
+</nz-drawer>

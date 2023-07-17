@@ -1,0 +1,40 @@
+<global-victory-banner-create *ngIf="showCreate" (reloadData)="reloadData()"></global-victory-banner-create>
+<input #searchInput class="search-input" type="text" placeholder="Search" [(ngModel)]="keyword">
+<nz-table [nzData]="listBanner" [nzFrontPagination]="false" [nzTotal]="total" [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageLimit" (nzPageIndexChange)="loadData()">
+    <thead>
+        <tr>
+            <th nzWidth="5%">STT</th>
+            <th nzWidth="20%">Banner Name</th>
+            <th nzWidth="20%">Banner Image</th>
+            <th nzWidth="12%">Updated At</th>
+            <th nzWidth="8%">Action</th>
+        </tr>
+    </thead>
+    <div class="spinner" *ngIf="loading">
+        <nz-spin [nzSize]="'large'">
+        </nz-spin>
+    </div>
+    <tbody *ngIf="!loading && listBanner.length > 0">
+        <tr *ngFor="let banner of listBanner; index as idx">
+            <td>{{idxStart + idx}}</td>
+            <td>{{ banner.banner_name }}</td>
+            <td>
+                <nz-avatar [nzShape]="'square'" [nzSrc]="host_api+'/'+banner.banner_image_url" [nzSize]="30"
+                    [nzIcon]="'mac-command'"></nz-avatar>
+            </td>
+            <td>{{ banner.updated_at | date: 'yyyy/MM/dd - HH:mm' }}</td>
+            <td>
+                <a style="margin-right: 15px;" (click)="showDetailBanner(banner.id)"
+                    nzPopconfirmPlacement="bottom"><span nz-icon nzType="eye" nzTheme="outline"></span></a>
+                <a *ngIf="showUpdate" style="margin-right: 15px;" (click)="showFormUpdate(banner.id)"
+                    nzPopconfirmPlacement="bottom"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+                <a *ngIf="showDelete" nz-popconfirm nzPopconfirmTitle="Are you sure delete this banner?"
+                    nzPopconfirmPlacement="bottom" (nzOnCancel)="cancel()" (nzOnConfirm)="deleteBanner(banner.id)">
+                    <span nz-icon nzType="delete" nzTheme="outline"></span></a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<global-victory-banner-update (reloadData)="reloadData()"></global-victory-banner-update>
+<global-victory-banner-detail></global-victory-banner-detail>

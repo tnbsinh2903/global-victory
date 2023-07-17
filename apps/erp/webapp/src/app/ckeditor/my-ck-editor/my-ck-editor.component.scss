@@ -1,0 +1,13 @@
+:host ::ng-deep .ck-editor__editable_inline { 
+    min-height: 300px; 
+    max-height: 300px; 
+}
+// :host ::ng-deep .content_preview figure {
+//     max-width: max-content;
+//     margin: 0 auto;
+    
+// }
+
+:host ::ng-deep figcaption {
+    text-align: center;
+}

@@ -1,0 +1,109 @@
+{
+  "name": "erp-webapp",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush"
+    }
+  },
+  "sourceRoot": "apps/erp/webapp/src",
+  "prefix": "global-victory",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/erp/webapp",
+        "index": "apps/erp/webapp/src/index.html",
+        "main": "apps/erp/webapp/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/erp/webapp/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/erp/webapp/src/favicon.ico",
+          "apps/erp/webapp/src/assets",
+          {
+            "glob": "**/*",
+            "input": "node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
+        ],
+        "styles": [
+          "node_modules/ng-zorro-antd/ng-zorro-antd.variable.min.css",
+          "apps/erp/webapp/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "erp-webapp:build:production"
+        },
+        "development": {
+          "browserTarget": "erp-webapp:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "erp-webapp:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/erp/webapp/**/*.ts",
+          "apps/erp/webapp/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/erp/webapp/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

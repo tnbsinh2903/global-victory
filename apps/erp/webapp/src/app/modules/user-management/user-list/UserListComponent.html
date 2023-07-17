@@ -1,0 +1,44 @@
+<div class="header-content">
+  <global-victory-user-create *ngIf="showCreate" (reloadData)="reloadData()"></global-victory-user-create>
+  <input class="search" nz-input placeholder="Search" [(ngModel)]="keyword" #searchInput />
+</div>
+<nz-table #basicTable [nzData]="listUsers" [nzFrontPagination]="false" [nzTotal]="total" [(nzPageIndex)]="pageIndex"
+  [(nzPageSize)]="pageLimit" (nzPageIndexChange)="loadData()">
+  <thead>
+    <tr>
+      <th>STT</th>
+      <th>Display name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th>Avatar</th>
+      <th>Last update</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <div class="spinner" *ngIf="loading">
+    <nz-spin [nzSize]="'large'">
+    </nz-spin>
+  </div>
+  <tbody *ngIf="!loading && listUsers.length > 0">
+    <tr *ngFor="let user of basicTable.data; index as idx">
+      <td>{{ idxStart+idx }}</td>
+      <td>{{ user.display_name }}</td>
+      <td><a (click)="showUserDetail(user.email)">{{ user.email }}</a></td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.address }}</td>
+      <td>
+        <nz-avatar [nzSize]="24" nzIcon="user" [nzSrc]="host_api+'/'+user.avatar_url"></nz-avatar>
+      </td>
+      <td>{{ user.updated_at | date: 'yyyy/MM/dd HH:mm'}}</td>
+      <td>
+        <a *ngIf="showUpdate" (click)="showFormUpdate(user.email)"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+        <a *ngIf="showDelete" nz-popconfirm [nzCancelText]="'Cancel'" nzPopconfirmTitle="Are you sure delete this user?" nzPopconfirmPlacement="bottom"
+          (nzOnConfirm)="confirmDelete(user.email)" (nzOnCancel)="cancel()"><span nz-icon nzType="delete"
+            nzTheme="outline"></span></a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<global-victory-user-details></global-victory-user-details>
+<global-victory-user-upsert (reloadData)="reloadData()"></global-victory-user-upsert>

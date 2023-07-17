@@ -1,0 +1,115 @@
+<nz-drawer [nzClosable]="false" [nzSize]="nzSize" [nzVisible]="visible" [nzPlacement]="placement" nzTitle="Update user"
+  (nzOnClose)="close()">
+  <ng-container *nzDrawerContent>
+    <div *ngIf="loading">
+      <nz-spin nzTip="Loading...">
+      </nz-spin>
+    </div>
+    <form nz-form [formGroup]="validateForm" *ngIf="userUpdate ">
+      <nz-form-item>
+        <nz-form-label [nzNoColon]="'true'" [nzSm]="10" [nzXs]="24"></nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <div class="imagePreview">
+            <nz-avatar [nzSize]="130" nzIcon="user" [nzSrc]="host_api + '/' + userUpdate.avatar_url"></nz-avatar>
+          </div>
+          <br>
+          <button class="buttonInputImage"><a (click)="showInputFileAvatar()">Update avatar</a></button>
+          <input #tasks hidden class="inputImage" value="avatarURL" nz-input type="file" accept="image/*" id="avatar"
+            formControlName="avatar" (change)="uploadAvatar($event)" name="avatar_url" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid email!">
+          <input class="input" nz-input formControlName="email" id="email" value="user.email"
+            [(ngModel)]="userUpdate.email" readonly />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="firstName" nzRequired>
+          <span>First name</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please first name is not invalid!">
+          <input class="input" nz-input id="firstName" formControlName="firstName"
+            [(ngModel)]="userUpdate.first_name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="lastName" nzRequired>
+          <span>Last name</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please last name is not invalid!">
+          <input class="input" nz-input id="lastName" formControlName="lastName" [(ngModel)]="userUpdate.last_name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="middleName">
+          <span>Middle name</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please middle name is not invalid!">
+          <input class="input" nz-input id="middleName" formControlName="middleName"
+            [(ngModel)]="userUpdate.middle_name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="displayName" nzRequired>
+          <span>Display name</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please display name is not invalid!">
+          <input class="input" nz-input id="displayName" formControlName="displayName"
+            [(ngModel)]="userUpdate.display_name" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password">Password</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+          <input class="input" nz-input type="password" id="password" formControlName="password" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="dateOfBirth" nzRequired>
+          <span>Date of birth</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzRequired>
+          <nz-date-picker formControlName="dateOfBirth" [nzFormat]="'yyyy/MM/dd'"
+            [(ngModel)]="userUpdate.date_of_birth"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone" nzRequired>
+          <span>Phone</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please phone number is not invalid!">
+          <input class="input" nz-input id="phone" formControlName="phone" [(ngModel)]="userUpdate.phone" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address">
+          <span>Address</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <input type="text" class="input" nz-input id="address" formControlName="address"
+            [(ngModel)]="userUpdate.address" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item *ngIf="!loading">
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="roles">
+          <span>Role</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+          <nz-select nzAllowClear nzPlaceHolder="{{userUpdate.role}}" formControlName="roles">
+            <nz-option *ngFor="let roleName of roleList" [nzValue]="roleName" id="roles"
+              [nzLabel]="roleName.name || 'Unknown'"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button (click)="submitForm()" nz-button nzType="primary">Update</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-drawer>

@@ -1,0 +1,58 @@
+<nz-layout style="height: 100vh;">
+    <nz-header style="background-color: #fff;">
+        <img class="logo" src="../../../assets/logoGV.png" />
+        <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
+            <li nz-submenu nzPlacement="topLeft" nzTitle="Information system">
+                <ul>
+                    <li *ngIf="showNews" nz-menu-item><a routerLink="/news-management"></a>News management</li>
+                    <li *ngIf="showProduct" nz-menu-item><a routerLink="/product-management"></a>Product management</li>
+                    <li *ngIf="showBanner" nz-menu-item><a routerLink="/banner-management"></a>Banner management</li>
+                </ul>
+            </li>
+            <li nz-submenu nzPlacement="topLeft" nzTitle="Application system">
+                <ul>
+                    <li *ngIf="showUser" nz-menu-item><a routerLink="/user-management"></a>User management</li>
+                    <li *ngIf="showRole" nz-menu-item><a routerLink="/permission-management"></a>Permissions system</li>
+                </ul>
+            </li>
+            <nz-avatar style=" float: right; margin-top: 10px;" [nzSrc]="host_api+'/'+avatar_url" [nzSize]="40"
+                nzIcon="user"></nz-avatar>
+            <li nz-submenu nzPlacement="topLeft" nzTitle="{{displayName}}"
+                style="display: flex; float: right; cursor: pointer;">
+                <ul>
+                    <li nz-menu-item><a routerLink="/user-management"></a>Profile</li>
+                    <hr>
+                    <li nz-menu-item>
+                        <a (click)="logout()">Log
+                            out</a><span style="margin-left: 10px; font-size: 12px;" nz-icon nzType="logout"
+                            nzTheme="outline"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </nz-header>
+    <nz-layout>
+        <nz-sider nzTheme="light" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+            <ul nz-menu nzMode="inline">
+                <ng-container
+                    *ngIf="router.url === '/news-management' || router.url === '/product-management' || router.url === '/banner-management' || router.url === '/dashboard'">
+                    <!-- <li nz-menu-item nzSelected><a routerLink="/dashboard"></a>Dashboard</li> -->
+                    <li *ngIf="showNews" nz-menu-item><a routerLink="/news-management"></a>News management</li>
+                    <li *ngIf="showProduct" nz-menu-item><a routerLink="/product-management"></a>Product management</li>
+                    <li *ngIf="showBanner" nz-menu-item><a routerLink="/banner-management"></a>Banner management</li>
+                </ng-container>
+                <ng-container
+                    *ngIf="router.url === '/permission-management' || router.url === '/user-management'  || router.url === '/role-management'">
+                    <li *ngIf="showUser" nz-menu-item><a routerLink="/user-management"></a>User management</li>
+                    <li *ngIf="showRole" nz-menu-item><a routerLink="/permission-management"></a>Permissions system</li>
+                    <li *ngIf="showRole" nz-menu-item><a routerLink="/role-management"></a>Role Management</li>
+                </ng-container>
+            </ul>
+        </nz-sider>
+        <nz-content>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>

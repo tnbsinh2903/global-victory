@@ -1,0 +1,31 @@
+<button nz-button nzType="primary" (click)="open()">Create</button>
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="720" [nzVisible]="visible"
+    nzTitle="Create Product" [nzClosable]="false" (nzOnClose)="close()">
+
+    <ng-container *nzDrawerContent>
+
+        <form nz-form [formGroup]="validateForm" nzLayout="horizontal">
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="productName" nzRequired>
+                    <span>Product Name</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Product Name Invalid!">
+                    <input type="text" class="input" nz-input id="productName" formControlName="productName" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="productDensity" nzRequired>
+                    <span>Product Density</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Product Density Invalid!">
+                    <input type="text" class="input" nz-input id="productDensity" formControlName="productDensity" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="19" [nzOffset]="11">
+                    <button (click)="createBanner()" nz-button btnCreate nzType="primary">Create Product</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-drawer>

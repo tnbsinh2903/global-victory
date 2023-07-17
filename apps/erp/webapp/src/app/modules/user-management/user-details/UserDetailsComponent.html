@@ -1,0 +1,52 @@
+<nz-drawer [nzClosable]="false" [nzSize]="'large'" [nzVisible]="isVisible" nzTitle="User Infomation"
+  (nzOnClose)="close()">
+  <ng-container *nzDrawerContent>
+    <div *ngIf="loading">
+      <nz-spin nzTip="Loading...">
+      </nz-spin>
+    </div>
+    <div class="data1" *ngIf="!loading">
+      <nz-descriptions [nzColon]="'false'" [nzColumn]="1">
+        <nz-descriptions-item>
+          <nz-avatar *ngIf="userDetail.avatar_url" class="avatar" [nzSize]="130" nzIcon="user"
+            [nzSrc]="host_api + '/' + userDetail.avatar_url"></nz-avatar>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Display name: ">
+          <p class="data">{{userDetail.display_name}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email: ">
+          <p class="data">{{userDetail.email}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="First name: ">
+          <p class="data">{{userDetail.first_name}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Middle name: ">
+          <p class="data">{{userDetail.middle_name}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Last name: ">
+          <p class="data">{{userDetail.last_name}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Date of birth:  ">
+          <p class="data">{{userDetail.date_of_birth | date: 'yyyy/MM/dd
+            HH:mm'}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Address: ">
+          <p class="data">{{userDetail.address}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Telephone: ">
+          <p class="data">{{userDetail.phone}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Updated at: ">
+          <p class="data">{{userDetail.updated_at | date: 'yyyy/MM/dd
+            HH:mm'}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Created By: ">
+          <p class="data">{{userDetail.created_by}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Updated By: ">
+          <p class="data">{{userDetail.updated_by}}</p>
+        </nz-descriptions-item>
+      </nz-descriptions>
+    </div>
+  </ng-container>
+</nz-drawer>

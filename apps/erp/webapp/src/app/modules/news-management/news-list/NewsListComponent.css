@@ -1,0 +1,64 @@
+nz-list-item {
+    margin: 10px 0;
+    padding: 10px 10px;
+}
+
+a {
+    margin: 0 10px;
+}
+
+.header-content {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.spinner {
+    margin: 80px 550px;
+}
+
+.search {
+    margin-right: 30px;
+    width: 300px;
+}
+
+.title-content {
+    margin: 0 0;
+}
+
+.title {
+    width: 500px;
+}
+
+.search-box {
+    padding: 8px;
+}
+
+.search-box input {
+    width: 188px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.search-box button {
+    width: 90px;
+}
+
+.search-button {
+    margin-right: 8px;
+}
+
+.trigger {
+    float: right;
+    margin-top: 10px;
+}
+
+.filter-time {
+    display: flex; margin-left: auto;
+}
+.filter-created-at {
+    margin-right: 20px;
+}
+
+::ng-deep .ant-pagination-options {
+    display: none;
+}

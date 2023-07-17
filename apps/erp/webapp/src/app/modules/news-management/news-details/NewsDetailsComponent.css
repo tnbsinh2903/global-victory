@@ -1,0 +1,39 @@
+.created_at {
+    text-align: right;
+    color: #757575;
+    font-size: 14px;
+}
+
+.created_at p {
+    margin: 0%;
+}
+
+
+.time {
+    width: 100%;
+}
+
+.title {
+    font-size: 32px;
+    line-height: 150%;
+    font-family: "Merriweather", serif;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.description {
+    color: #626165;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+::ng-deep.image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+}
+::ng-deep.image img {
+    width: -webkit-fill-available;
+  
+}

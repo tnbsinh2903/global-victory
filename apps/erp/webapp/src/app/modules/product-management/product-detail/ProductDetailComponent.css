@@ -1,0 +1,61 @@
+.imageDetail {
+    margin-left: 130px;
+    margin-bottom: 20px;
+}
+
+.dataUpdate {
+    margin-left: 41px;
+}
+
+.dataCreate {
+    margin-left: 45px;
+}
+
+.bannerName {
+    margin-left: 26px;
+}
+
+
+input[type=checkbox].cbDetail {
+    position: relative;
+    cursor: pointer;
+    margin-left: 66px;
+
+}
+
+input[type=checkbox].cbDetail:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 23px;
+    height: 21px;
+    top: -7px;
+    left: 0;
+    background-color: #e9e9e9;
+}
+
+input[type=checkbox].cbDetail:checked:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 23px;
+    height: 21px;
+    top: -7px;
+    left: 0;
+    background-color: #1E80EF;
+}
+
+input[type=checkbox].cbDetail:checked:after {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 15px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: -7px;
+    left: 7px;
+}

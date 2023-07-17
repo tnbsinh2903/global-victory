@@ -1,0 +1,59 @@
+<button nz-button nzType="primary" (click)="open()">Create</button>
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="720" [nzVisible]="visible"
+    nzTitle="Create Banner" [nzClosable]="false" (nzOnClose)="close()">
+
+    <ng-container *nzDrawerContent>
+
+        <form nz-form [formGroup]="validateForm" nzLayout="horizontal">
+            <nz-form-item>
+                <nz-form-label [nzNoColon]="'true'" [nzSm]="6" [nzXs]="24"></nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                    <div>
+                        <div>
+                            <nz-avatar style="width: 400px; height: 155px;" [nzShape]="'square'" [nzSize]="120"
+                                nzIcon="cloud" [nzSrc]="imageUrl"></nz-avatar>
+                        </div>
+                        <br>
+                        <button class="buttonInputImage" (click)="showInputUpload()"><a>Post Banner</a></button>
+                        <input #tasks hidden (change)="uploadBannerImage($event)" value="imageBanner" nz-input
+                            type="file" accept="image/*" id="bannerImage" formControlName="bannerImage" />
+                    </div>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="bannerName" nzRequired>
+                    <span>Name banner</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Name Banner Invalid!">
+                    <input type="text" class="input" nz-input id="bannerName" formControlName="bannerName" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="bannerParagraph" nzRequired>
+                    <span>Name Paragraph</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Name Paragraph Invalid!">
+                    <textarea class="input" cols="60" rows="4" nz-input id="bannerParagraph"
+                        formControlName="bannerParagraph"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="pinTop" nzRequired>
+                    <span>Pin Top</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="6" [nzXs]="24">
+                    <input class="inputCheckbox" formControlName="pinTop" type="checkbox" (change)="pintop($event)" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-control [nzSpan]="19" [nzOffset]="11">
+                    <button (click)="createBanner()" nz-button btnCreate nzType="primary">Create Banner</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-drawer>

@@ -1,0 +1,13 @@
+input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.buttonInputImage {
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 12px;
+}

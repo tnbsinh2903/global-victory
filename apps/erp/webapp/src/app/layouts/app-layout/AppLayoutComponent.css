@@ -1,0 +1,47 @@
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .trigger:hover {
+    color: #1890ff;
+  }
+
+  .logo {
+    width: 65px;
+    background: rgba(255, 255, 255,0);
+    margin: 0 10px 16px 0;
+    float: left;
+  }
+  .header-menu {
+    line-height: 64px;
+    margin-left: 166px
+  }
+
+  nz-content {
+    margin: 0 16px;
+  }
+
+  nz-breadcrumb {
+    margin: 16px 0;
+  }
+
+  .inner-content {  
+    padding: 24px;
+    background: #fff;
+    min-height: 360px;
+  }
+
+  .logout {
+    font-size: 23px;
+    display: flex;
+    float: right;
+    margin-top: 22px;
+  }
+
+  nz-footer {
+    text-align: center;
+  }

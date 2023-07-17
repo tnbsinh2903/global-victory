@@ -1,0 +1,35 @@
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="720" [nzVisible]="visible"
+    nzTitle="Update Banner" [nzClosable]="false" (nzOnClose)="close()">
+
+    <ng-container *nzDrawerContent>
+
+        <form nz-form [formGroup]="validateForm" *ngIf="formProductUpdate">
+            <input type="hidden" id="idProduct" formControlName="idProduct" [(ngModel)]="formProductUpdate.id">
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="productName" nzRequired>
+                    <span>Product Name</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Product Name Invalid!">
+                    <input type="text" class="input" nz-input id="productName" formControlName="productName"
+                        [(ngModel)]="formProductUpdate.product_name" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="productDensity" nzRequired>
+                    <span>Product Density</span>
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Product Density Invalid!">
+                    <input type="text" class="input" nz-input id="productDensity" formControlName="productDensity"
+                        [(ngModel)]="formProductUpdate.product_density" />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-control [nzSpan]="19" [nzOffset]="11">
+                    <button (click)="updateBanner()" nz-button btnCreate nzType="primary">Update Product</button>
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </ng-container>
+</nz-drawer>

@@ -1,0 +1,26 @@
+.form-input {
+    margin-left: 46px;
+}
+
+.input_hashtag {
+    margin-left: 26px;
+}
+
+.form-ckeditor {
+    margin-left: 23px;
+}
+
+.pintop {
+    margin-left: 38px
+}
+
+::ng-deep .ant-modal {
+    top: 15px;
+    left: 10px;
+    right: 10px;
+    bottom: 15px;
+}
+
+.button {
+    margin-right: 15px;
+}

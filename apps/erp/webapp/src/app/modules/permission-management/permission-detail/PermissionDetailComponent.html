@@ -1,0 +1,43 @@
+<nz-drawer [nzBodyStyle]="{ overflow: 'auto' }" [nzMaskClosable]="true" [nzWidth]="920" [nzVisible]="isVisible"
+    nzTitle="Permission Detail Of {{selectedNameRole}}" [nzClosable]="false" (nzOnClose)="close()">
+    <ng-container *nzDrawerContent>
+        <nz-table nzTemplateMode #fixedTable [nzData]="listRoles" [nzFrontPagination]="false"
+            [nzShowPagination]="false">
+            <thead>
+            </thead>
+            <div class="spinner" *ngIf="loading">
+                <nz-spin [nzSize]="'large'">
+                </nz-spin>
+            </div>
+            <tbody *ngIf="!loading">
+                <tr *ngFor="let item of fixedTable.data; let i = index" [hidden]="item.id !== selectedId">
+                    <td>
+                        <div *ngFor="let module of listOfModule">
+                    <td class="moduleName">{{module.name}}</td>
+                    </div>
+                    </td>
+                    <td style="text-align:center;">
+                        <div class="row" *ngFor="let module of listOfModule">
+                            <ng-container *ngFor="let permission of module.permissions">
+                                <nz-checkbox-wrapper class="nz-checkbox-wrapper" *ngIf="!loading">
+                                    <div nz-row>
+                                        <div class="inputCheckbox" nz-col nzSpan="24">
+                                            <input type="checkbox" #myCheckbox nz-popconfirm
+                                                nzPopconfirmTitle="Are you sure change permission ?"
+                                                nzPopconfirmPlacement="left" [nzOkText]="'Yes'" [nzCancelText]="'No'"
+                                                [checked]="checkPermission(item.id, module.tag, permission)"
+                                                (nzOnConfirm)="confirm(item.id, module.tag, permission,myCheckbox)"
+                                                (nzOnCancel)="handleCancle()">
+                                            {{ permission }}
+                                        </div>
+                                    </div>
+
+                                </nz-checkbox-wrapper>
+                            </ng-container>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+    </ng-container>
+</nz-drawer>

@@ -1,0 +1,72 @@
+<nz-modal [nzWidth]="960" [(nzVisible)]="isVisible" nzTitle="Update News" (nzOnCancel)="handleCancel()"
+  (nzOnOk)="submitForm()">
+  <ng-container *nzModalContent>
+    <div *ngIf="loading">
+      <nz-spin nzTip="Loading...">
+      </nz-spin>
+    </div>
+    <nz-tabset *ngIf="!loading">
+      <nz-tab nzTitle="Update news">
+        <form nz-form [formGroup]="validateForm">
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
+                <nz-form-control class="form-input" nzErrorTip="The input is not valid!">
+                  <input nz-input [(ngModel)]="newsUpdate.title" formControlName="title"
+                    placeholder="Please input the title" id="title" />
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired nzFor="description">Description</nz-form-label>
+                <nz-form-control nzErrorTip="The input is not valid!">
+                  <textarea [(ngModel)]="newsUpdate.description" nz-input formControlName="description" id="description"
+                    placeholder="Please input the description" [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzRequired nzFor="content">Content</nz-form-label>
+                <nz-form-control class="form-ckeditor" nzErrorTip="The input is not valid!">
+                  <app-my-ck-editor nz-input formControlName="content" id="content"
+                    placeholder="Please input the content" [ngModel]="newsUpdate.rich_text_content"
+                    (ngModelChange)="changeContent($event)"></app-my-ck-editor>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+          <div nz-row [nzGutter]="8">
+            <div nz-col nzSpan="24">
+              <nz-form-item>
+                <nz-form-label nzFor="pintop">Pin top</nz-form-label>
+                <nz-form-control class="pintop">
+                  <nz-switch (click)="changeSwitch($event)" [ngModel]="newsUpdate.pinned_top" nz-input
+                    formControlName="pintop" id="pintop"></nz-switch>
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+          </div>
+        </form>
+      </nz-tab>
+      <nz-tab nzTitle="Preview news">
+        <div>
+          <h1>{{validateForm.value.title}}</h1>
+          <h4>Author</h4>
+          <p>{{currentDay | date: 'yyyy/MM/dd HH:mm'}}</p>
+        </div>
+        <div>
+          <h3 style="color: rgb(77, 72, 72);">{{validateForm.value.description}}</h3>
+        </div>
+        <div class="content_preview" [innerHTML]="htmlData">
+        </div>
+      </nz-tab>
+    </nz-tabset>
+  </ng-container>
+</nz-modal>

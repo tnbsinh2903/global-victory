@@ -1,0 +1,26 @@
+<global-victory-create-role (realoadData)="onCreateNewRole($event)"></global-victory-create-role>
+<nz-table #fixedTable [nzData]="listRoles" [nzFrontPagination]="false" (nzPageIndexChange)="loadData()">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name Role</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <div class="spinner" *ngIf="loading">
+        <nz-spin nzTip="Loading...">
+        </nz-spin>
+    </div>
+    <tbody>
+        <tr *ngFor=" let role of fixedTable.data; index as idx">
+            <td>{{role.id}}</td>
+            <td>{{role.name}}</td>
+            <td>
+                <a nz-popconfirm nzPopconfirmTitle="Are you sure delete this user?" nzPopconfirmPlacement="bottom"
+                    (nzOnConfirm)="deleteRole(role.id)" (nzOnCancel)="cancel()"><span nz-icon nzType="delete"
+                        nzTheme="outline"></span></a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

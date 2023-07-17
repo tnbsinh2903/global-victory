@@ -1,0 +1,20 @@
+<nz-modal [nzWidth]="1370"  [nzFooter]="null" [(nzVisible)]="isVisible" nzTitle="News Details" (nzOnCancel)="handleCancel()">
+    <ng-container *nzModalContent>
+        <div *ngIf="loading">
+            <nz-spin nzTip="Loading...">
+            </nz-spin>
+        </div>
+        <div *ngIf="!loading" class="modal">
+            <div class="time">
+                <p class="created_at">{{newsDetails.created_at | date: 'EEEE, MMM d y, h:mm a zzzz '}}</p>
+            </div>
+            <h1 class="title">{{newsDetails.title}}</h1>
+            <div class="description">{{newsDetails.description}}</div>
+            <div class="rich-text-content" [innerHTML]="newsDetails.rich_text_content"></div>
+            <div>
+                <span>Pin top: </span>
+                <nz-switch [ngModel]="newsDetails.pinned_top" [nzDisabled]="true"></nz-switch>
+            </div>
+        </div>
+    </ng-container>
+</nz-modal>

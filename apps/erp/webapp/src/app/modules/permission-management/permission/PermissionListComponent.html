@@ -1,0 +1,25 @@
+<nz-table class="my-table" nzTemplateMode #fixedTable [nzData]="listRoles" [nzFrontPagination]="false"
+    [nzShowPagination]="false">
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th nzWidth="30%">Role</th>
+            <th>Permission</th>
+        </tr>
+    </thead>
+    <div class="spinner" *ngIf="loading">
+        <nz-spin [nzSize]="'large'">
+        </nz-spin>
+    </div>
+    <tbody>
+        <tr style="height: 50px;" *ngFor="let item of listRoles; let i = index">
+            <td>{{i +1}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                <button (click)="showDetail(item.id)" nz-button nzSize="small" nzType="primary">View</button>
+
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<global-victory-permission-detail (reloadData)="reloadData()"></global-victory-permission-detail>

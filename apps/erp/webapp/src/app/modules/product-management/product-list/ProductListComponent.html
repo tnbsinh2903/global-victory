@@ -1,0 +1,37 @@
+<global-victory-product-create *ngIf="showCreate" (reloadData)="reloadData()"></global-victory-product-create>
+<input #searchInput class="search-input" type="text" placeholder="Search" [(ngModel)]="keyword">
+<nz-table [nzData]="listProduct" [nzFrontPagination]="false" [nzTotal]="total" [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageLimit" (nzPageIndexChange)="loadData()">
+    <thead>
+        <tr>
+            <th nzWidth="5%">STT</th>
+            <th nzWidth="20%">Product Name</th>
+            <th nzWidth="20%">Product Density (KG)</th>
+            <th nzWidth="12%">Updated At</th>
+            <th nzWidth="8%">Action</th>
+        </tr>
+    </thead>
+    <div class="spinner" *ngIf="loading">
+        <nz-spin [nzSize]="'large'">
+        </nz-spin>
+    </div>
+    <tbody *ngIf="!loading && listProduct.length > 0">
+        <tr *ngFor="let product of listProduct; index as idx">
+            <td>{{idxStart + idx}}</td>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.product_density }} </td>
+            <td>{{ product.updated_at | date: 'yyyy/MM/dd - HH:mm' }}</td>
+            <td>
+                <a style="margin-right: 15px;" (click)="showDetailProduct(product.id)"
+                    nzPopconfirmPlacement="bottom"><span nz-icon nzType="eye" nzTheme="outline"></span></a>
+                <a *ngIf="showUpdate" style="margin-right: 15px;" (click)="showFormUpdate(product.id)"
+                    nzPopconfirmPlacement="bottom"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+                <a *ngIf="showDelete" nz-popconfirm nzPopconfirmTitle="Are you sure delete this banner?"
+                    nzPopconfirmPlacement="bottom" (nzOnCancel)="cancel()" (nzOnConfirm)="deleteBanner(product.id)">
+                    <span nz-icon nzType="delete" nzTheme="outline"></span></a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<global-victory-product-update (reloadData)="reloadData()"></global-victory-product-update>
+<global-victory-product-detail></global-victory-product-detail>

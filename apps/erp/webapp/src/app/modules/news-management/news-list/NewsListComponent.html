@@ -1,0 +1,77 @@
+<div class="header-content">
+  <global-victory-create-news *ngIf="showCreate" (reloadData)="reloadData()"></global-victory-create-news>
+  <input class="search" nz-input placeholder="Search" [(ngModel)]="keyword" #searchInput />
+  <div class="filter-time">
+    <div class="filter-created-at">
+      <span>
+        Created at:
+      </span>
+      <nz-range-picker style="width:250px" [nzPlaceHolder]="'SE'" [(ngModel)]="dateCreatedAt"
+        (ngModelChange)="onChangeDateCreate($event)"></nz-range-picker>
+    </div>
+    <div >
+      <span >
+        Updated at:
+      </span>
+      <nz-range-picker style="width:250px" [nzPlaceHolder]="'SE'" [(ngModel)]="dateUpdatedAt"
+        (ngModelChange)="onChangeDateUpdate($event)"></nz-range-picker>
+    </div>
+  </div>
+</div>
+<nz-table nzShowSizeChanger (nzQueryParams)="onQueryParamsChange($event)" #filterTable [nzData]="listNews"
+  [nzFrontPagination]="false" [nzTotal]="total" [(nzPageSize)]="pageLimit" [(nzPageIndex)]="pageIndex"
+  (nzPageIndexChange)="loadData()">
+  <thead>
+    <tr *ngIf="showView">
+      <th>STT</th>
+      <th>Title
+        <nz-filter-trigger class="trigger" [(nzVisible)]="visible" [nzActive]="searchHashTagValue.length > 0"
+          [nzDropdownMenu]="menu">
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th nzColumnKey="CreatedAt" [nzSortFn]="true">Created at</th>
+      <th nzColumnKey="UpdatedAt" [nzSortFn]="true">Updated at</th>
+      <th nzColumnKey="PinnedTop" [nzSortFn]="true" [nzFilters]="filterPinnedTop" [nzFilterFn]="true">Pin top</th>
+      <th>Created by</th>
+      <th nzWidth = '10%'>Action</th>
+    </tr>
+  </thead>
+  <div class="spinner" *ngIf="loading">
+    <nz-spin [nzSize]="'large'">
+    </nz-spin>
+  </div>
+  <tbody *ngIf="!loading && listNews.length > 0">
+    <tr *ngFor="let data of filterTable.data; index as idx" cdkDrag>
+      <td>{{ idxStart+idx }}</td>
+      <td class="title">
+        <a class="title-content" (click)="showNewsDetail(data.id)">{{ data.title }}</a>
+        <br>
+        <nz-tag *ngFor="let tag of data.hash_tag" [nzColor]="'blue'">{{tag}}</nz-tag>
+      </td>
+      <td>{{ data.created_at | date: 'yyyy/MM/dd HH:mm'}}</td>
+      <td>{{ data.updated_at | date: 'yyyy/MM/dd HH:mm'}}</td>
+      <td>
+        <nz-switch [ngModel]="data.pinned_top" [nzDisabled]="true"></nz-switch>
+      </td>
+      <td>{{ data.created_by}}</td>
+      <td>
+        <a *ngIf="showUpdate" (click)="showFormUpdate(data.id)"><span nz-icon nzType="edit" nzTheme="outline"></span></a>
+        <a *ngIf="showDelete" nz-popconfirm [nzCancelText]="'Cancel'" nzPopconfirmTitle="Are you sure delete this news?"
+          nzPopconfirmPlacement="bottom" (nzOnConfirm)="confirmDelete(data.id)" (nzOnCancel)="cancel()"><span nz-icon
+            nzType="delete" nzTheme="outline"></span></a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchHashTagValue" />
+      <button nz-button nzSize="small" nzType="primary" (click)="filterHashtag()" class="search-button">Search</button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+<global-victory-details-news></global-victory-details-news>
+<global-victory-upsert-news (reloadData)="reloadData()"></global-victory-upsert-news>

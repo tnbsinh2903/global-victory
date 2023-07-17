@@ -1,0 +1,15 @@
+.search-input {
+    border: 1px solid #6a6666;
+    border-radius: 3px;
+    padding: 5px;
+    width: 170px;
+    height: 30px;
+    font-size: 15px;
+    outline: none;
+    margin-left: 10px;
+}
+
+
+.spinner {
+    margin: 80px 550px;
+}
