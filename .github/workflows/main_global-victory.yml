@@ -29,8 +29,7 @@ jobs:
       
       - name: Create artifact archive
         run: |
-          Add-Type -A 'System.IO.Compression.FileSystem'
-          [IO.Compression.ZipFile]::CreateFromDirectory('directory-to-archive', 'artifact.zip')
+          Compress-Archive -Path 'directory-to-archive' -DestinationPath 'artifact.zip'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
